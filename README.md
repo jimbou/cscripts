@@ -123,7 +123,7 @@ These are the required fields:
 
 These are all provided as `inputs`. You also need to instantiate an `azure-importer` model to handle the Azure-specific `input` data. Here's what a complete `impl` could look like:
 
-```
+```yaml
 name: azure-demo
 description: example impl invoking Azure model
 initialize:
