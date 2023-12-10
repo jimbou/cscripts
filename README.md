@@ -169,34 +169,27 @@ These can be used as inputs in other models in the pipeline. Typically, the `ins
 The outputs look as follows:
 
 ```yaml
-outputs:
-  - timestamp: '2023-11-02T10:35:00.000Z'
-    duration: 300
-    azure-observation-window: 5 min
-    azure-observation-aggregation: 'average'
-    azure-subscription-id: 9cf5e19b-8b18-4c37-9541-55fc47ad70c3
-    azure-resource-group: my_group
-    azure-vm-name: my_vm
-    cpu-util: '0.314'
-    mem-availableGB: 0.488636416
-    mem-usedGB: 0.5113635839999999
-    total-memoryGB: '1'
-    mem_util: 51.13635839999999
-    location: uksouth
-    cloud-instance-type: Standard_B1s
-  - timestamp: '2023-11-02T10:40:00.000Z'
-    duration: 300
-    azure-observation-window: 5 min
-    azure-observation-aggregation: 'average'
-    azure-subscription-id: 9cf5e19b-8b18-4c37-9541-55fc47ad70c3
-    azure-resource-group: my_group
-    azure-vm-name: my_vm
-    cpu-util: '0.314'
-    mem-availableGB: 0.48978984960000005
-    mem-usedGB: 0.5102101504
-    total-memoryGB: '1'
-    mem_util: 51.021015039999995
-    location: uksouth
-    cloud-instance-type: Standard_B1s
+name: azure-demo
+description: example impl invoking Azure model
+initialize:
+  models:
+    - name: azure-importer
+      model: AzureImporterModel
+      path: '@grnsft/if-unofficial-models'
+graph:
+  children:
+    child:
+      pipeline:
+        - azure-importer
+      config:
+        azure-importer:
+      inputs:
+        - timestamp: '2023-11-02T10:35:31.820Z'
+          duration: 3600
+          azure-observation-window: 5 min
+          azure-observation-aggregation: 'average'
+          azure-subscription-id: 9cf5e19b-8b18-4c37-9541-55fc47ad70c3
+          azure-resource-group: my_group
+          azure-vm-name: my_vm
 ...
 ```
